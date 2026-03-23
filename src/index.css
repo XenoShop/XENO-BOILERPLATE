@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ui-bg: #0f0f11;
+  --ui-panel: rgba(25, 25, 30, 0.6);
+  --ui-layer: #18181b;
+  --ui-border: #27272a;
+  --ui-accent: #ff7300;
+  --ui-accent-strong: #ff9100;
+  --ui-text-muted: #a1a1aa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: 'Space Grotesk', 'Trebuchet MS', 'Segoe UI', sans-serif;
+  background: radial-gradient(circle at 15% 15%, rgba(255, 115, 0, 0.18), transparent 35%),
+    radial-gradient(circle at 85% 0%, rgba(139, 92, 246, 0.12), transparent 30%),
+    var(--ui-bg);
+  color: white;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
