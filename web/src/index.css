@@ -37,6 +37,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html[data-ingame='true'],
+html[data-ingame='true'] body {
+  background: transparent;
+  overflow: hidden;
+}
+
 .hide-scrollbar {
   scrollbar-width: none;
 }

@@ -1,9 +1,13 @@
 import { useEffect, useState, type ReactNode } from 'react'
 import { AnimatePresence, MotionConfig, motion } from 'framer-motion'
-import { FormInput, LayoutDashboard, Puzzle, Settings as SettingsIcon } from 'lucide-react'
+import { FormInput, LayoutDashboard, Loader2, Puzzle, Settings as SettingsIcon, X } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { Badge } from './ui/Badge'
+import { Button } from './ui/Button'
 import { AccentPicker } from './ui/AccentPicker'
+import { useSession } from '../hooks/useSession'
+import { t } from '../lib/i18n'
+import { inGame } from '../lib/nui'
 import { usePreferences } from '../styles/preferences'
 import { Components } from '../views/Components'
 import { Forms } from '../views/Forms'
@@ -12,18 +16,6 @@ import { Settings } from '../views/Settings'
 
 type ViewId = 'overview' | 'components' | 'forms' | 'settings'
 type NavItem = { id: ViewId; icon: LucideIcon; label: string }
-
-const NAV: { group: string; items: NavItem[] }[] = [
-  {
-    group: 'Workspace',
-    items: [
-      { id: 'overview', icon: LayoutDashboard, label: 'Overview' },
-      { id: 'components', icon: Puzzle, label: 'Components' },
-      { id: 'forms', icon: FormInput, label: 'Forms' },
-    ],
-  },
-  { group: 'System', items: [{ id: 'settings', icon: SettingsIcon, label: 'Settings' }] },
-]
 
 const VIEWS: Record<ViewId, () => ReactNode> = {
   overview: () => <Overview />,
@@ -44,22 +36,68 @@ function Clock() {
 }
 
 export function Shell() {
+  const { visible, boot, profile, error, reload, close } = useSession()
   const [view, setView] = useState<ViewId>('overview')
   const [prefs] = usePreferences()
-  const items = NAV.flatMap((g) => g.items)
+
+  if (!visible) return null
+
+  const backdrop = inGame ? 'bg-black/45' : ''
+
+  if (!boot) {
+    return (
+      <div className={`fixed inset-0 flex items-center justify-center ${backdrop}`}>
+        <div className="w-[min(420px,92vw)] rounded-panel-xl border border-white/10 bg-ui-panel p-6 text-center shadow-ui-soft">
+          {error ? (
+            <>
+              <p className="text-sm text-zinc-300">{error}</p>
+              <div className="mt-4 flex justify-center gap-2">
+                <Button size="sm" onClick={() => void reload()}>
+                  {t('ui.retry')}
+                </Button>
+                {inGame && (
+                  <Button size="sm" variant="ghost" onClick={close}>
+                    {t('ui.close')}
+                  </Button>
+                )}
+              </div>
+            </>
+          ) : (
+            <div className="flex items-center justify-center gap-3 text-sm text-zinc-400" role="status">
+              <Loader2 className="h-5 w-5 animate-spin text-ui-accent" />
+              {t('ui.loading')}
+            </div>
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  const nav: { group: string; items: NavItem[] }[] = [
+    {
+      group: t('nav.workspace'),
+      items: [
+        { id: 'overview', icon: LayoutDashboard, label: t('nav.overview') },
+        { id: 'components', icon: Puzzle, label: t('nav.components') },
+        { id: 'forms', icon: FormInput, label: t('nav.forms') },
+      ],
+    },
+    { group: t('nav.system'), items: [{ id: 'settings', icon: SettingsIcon, label: t('nav.settings') }] },
+  ]
+  const items = nav.flatMap((g) => g.items)
 
   return (
     <MotionConfig reducedMotion={prefs.reducedMotion ? 'always' : 'user'}>
-      <div className="fixed inset-0 flex items-center justify-center p-3 sm:p-4" style={{ zoom: prefs.scale }}>
+      <div className={`fixed inset-0 flex items-center justify-center p-3 sm:p-4 ${backdrop}`} style={{ zoom: prefs.scale }}>
         <div className="relative flex h-[min(860px,calc(94vh/var(--ui-scale,1)))] w-[min(1320px,calc(96vw/var(--ui-scale,1)))] overflow-hidden rounded-panel-xl border border-white/10 bg-ui-bg/95 shadow-ui-soft backdrop-blur-panel">
-          <nav className="hidden w-64 shrink-0 flex-col border-r border-white/[0.07] bg-black/25 px-3 py-5 md:flex" aria-label="Main">
+          <nav className="hidden w-64 shrink-0 flex-col border-r border-white/[0.07] bg-black/25 px-3 py-5 md:flex" aria-label={t('nav.label')}>
             <div className="mb-3 px-2">
               <img src="./xeno-logo.png" alt="Xeno" draggable={false} className="mx-auto h-[58px] w-auto select-none" />
             </div>
             <div className="mb-3 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
             <div className="flex-1 space-y-3.5 overflow-y-auto hide-scrollbar">
-              {NAV.map((group) => (
+              {nav.map((group) => (
                 <div key={group.group}>
                   <p className="mb-1.5 px-3 text-[11px] font-semibold text-zinc-600">{group.group}</p>
                   <ul className="space-y-px">
@@ -95,10 +133,10 @@ export function Shell() {
             </div>
 
             <div className="mt-4 rounded-xl border border-white/[0.07] bg-white/[0.03] px-3 py-2.5">
-              <p className="truncate text-sm font-semibold text-white">Jane Doe</p>
+              <p className="truncate text-sm font-semibold text-white">{boot.me.name || t('shell.guest')}</p>
               <div className="mt-1 flex items-center justify-between">
-                <Badge tone="accent">Admin</Badge>
-                <span className="text-[11.5px] text-zinc-600">v1.0.0</span>
+                <Badge tone="accent">{profile?.job?.label ?? t('shell.no_job')}</Badge>
+                <span className="text-[11.5px] text-zinc-600">v{boot.settings.version}</span>
               </div>
             </div>
           </nav>
@@ -112,6 +150,11 @@ export function Shell() {
               <div className="flex items-center gap-4">
                 <AccentPicker size="sm" />
                 <Clock />
+                {inGame && (
+                  <Button variant="ghost" size="sm" icon={<X className="h-4 w-4" />} onClick={close} title={t('ui.close')}>
+                    <span className="hidden sm:inline">{t('ui.close')}</span>
+                  </Button>
+                )}
               </div>
             </header>
 
