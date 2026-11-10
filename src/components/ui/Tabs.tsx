@@ -10,7 +10,7 @@ export function Tabs<T extends string>({ value, onChange, items }: TabsProps<T>)
           aria-selected={value === item.value}
           onClick={() => onChange(item.value)}
           className={`rounded-lg px-3.5 py-1.5 text-[13px] font-semibold transition-colors ${
-            value === item.value ? 'bg-white/10 text-white shadow-[inset_0_-2px_0_0_#FF7A1A]' : 'text-zinc-400 hover:text-zinc-100'
+            value === item.value ? 'bg-white/10 text-white shadow-[inset_0_-2px_0_0_rgb(var(--ui-accent))]' : 'text-zinc-400 hover:text-zinc-100'
           }`}
         >
           {item.label}

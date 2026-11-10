@@ -7,8 +7,10 @@
   --ui-panel: #12141a;
   --ui-layer: #161920;
   --ui-border: rgba(255, 255, 255, 0.07);
-  --ui-accent: #ff7a1a;
-  --ui-accent-strong: #ffa03a;
+  --ui-accent: 255 122 26;
+  --ui-accent-bright: 255 160 58;
+  --ui-accent-deep: 255 107 10;
+  --ui-accent-ink: 26 13 2;
   --ui-text-muted: #8a909d;
 }
 
@@ -27,7 +29,7 @@ body,
 body {
   font-family: 'Manrope Variable', 'Segoe UI', system-ui, sans-serif;
   font-feature-settings: 'tnum' 1, 'cv11' 1;
-  background: radial-gradient(circle at 12% 0%, rgba(255, 122, 26, 0.1), transparent 38%), var(--ui-bg);
+  background: radial-gradient(circle at 12% 0%, rgb(var(--ui-accent) / 0.1), transparent 38%), var(--ui-bg);
   color: #eceef3;
   overflow-x: hidden;
   text-rendering: optimizeLegibility;
@@ -54,7 +56,7 @@ body {
 
 button:focus-visible,
 [role='radio']:focus-visible {
-  outline: 2px solid rgba(255, 115, 0, 0.7);
+  outline: 2px solid rgb(var(--ui-accent) / 0.7);
   outline-offset: 2px;
 }
 

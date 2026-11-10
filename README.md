@@ -25,24 +25,28 @@ It carries the visual language of the Xeno Evidence & Forensics UI (deep dark ba
 ## Project Structure
 
 src/
-- components/ui/
-  - Badge.tsx
-  - Button.tsx (primary / ghost / danger, sm / md, loading)
-  - Card.tsx
-  - Field.tsx (Field, Input, Select, Textarea, Check)
-  - Meter.tsx
-  - SectionHeader.tsx
-  - Tabs.tsx
+- components/
+  - Shell.tsx (app shell: sidebar, header, view switching)
+  - ui/ Badge, Button, Card, Field (Input, Select, Textarea, Check), Meter, Panel (ViewHeader, Panel, Stat), SectionHeader, Tabs, AccentPicker
+- views/ Overview, Components, Forms, Settings (example pages, replace with your own)
 - styles/
+  - themes.ts (accent presets, persisted in localStorage)
+  - preferences.ts (interface scale, reduced motion)
   - tokens.ts
-- App.tsx (showcase page, replace with your own app)
-- main.tsx
-- index.css
+- hooks/useAccent.ts
+- App.tsx, main.tsx, index.css
+
+## Accent colors
+
+The accent is a set of CSS variables (`--ui-accent`, `--ui-accent-bright`, `--ui-accent-deep`, `--ui-accent-ink`) mapped to the Tailwind colors `ui-accent`, `ui-accentBright`, `ui-accentDeep` and `ui-accentInk`.
+Use them anywhere (`bg-ui-accent/10`, `text-ui-accent`, `from-ui-accentBright`) and the whole UI follows the selected color.
+
+- Switch at runtime with the swatches in the header, `<AccentPicker />`, or `setAccent('blue')`.
+- Add or change presets in `src/styles/themes.ts` (`ACCENTS`). The default is the first entry.
 
 ## Customization Guide
 
-- Color tokens: `src/styles/tokens.ts` and `tailwind.config.js`
-- Base page styling, typography and focus rings: `src/index.css`
+- Neutral palette and fonts: `tailwind.config.js` and `src/index.css`
 - Typeface: `fontFamily.sans` in `tailwind.config.js`
 
 ## Notes

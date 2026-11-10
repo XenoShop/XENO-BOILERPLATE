@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react'
 
-export type Tone = 'orange' | 'success' | 'info' | 'danger' | 'violet' | 'blue' | 'amber' | 'pink' | 'yellow' | 'zinc'
+export type Tone = 'accent' | 'success' | 'info' | 'danger' | 'violet' | 'blue' | 'amber' | 'pink' | 'yellow' | 'zinc'
 
 const tones: Record<Tone, string> = {
-  orange: 'border-ui-orange/30 bg-ui-orange/12 text-ui-orangeBright',
+  accent: 'border-ui-accent/30 bg-ui-accent/12 text-ui-accentBright',
   success: 'border-ui-success/40 bg-ui-success/15 text-ui-success',
   info: 'border-ui-info/40 bg-ui-info/15 text-ui-info',
   danger: 'border-ui-danger/40 bg-ui-danger/15 text-ui-danger',

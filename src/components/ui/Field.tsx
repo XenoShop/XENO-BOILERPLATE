@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
 const control =
-  'rounded-xl border border-white/10 bg-black/25 px-3 py-2 text-sm text-zinc-100 placeholder:text-zinc-500 focus:border-ui-orange/60 focus:outline-none focus:ring-2 focus:ring-ui-orange/20 disabled:opacity-50'
+  'rounded-xl border border-white/10 bg-black/25 px-3 py-2 text-sm text-zinc-100 placeholder:text-zinc-500 focus:border-ui-accent/60 focus:outline-none focus:ring-2 focus:ring-ui-accent/20 disabled:opacity-50'
 
 type LabelProps = { label: string; hint?: string; children: ReactNode; className?: string }
 
@@ -62,7 +62,7 @@ export const Check = ({ checked, onChange, label, disabled }: CheckProps) => (
   <label className={`flex cursor-pointer items-center gap-2 text-sm text-zinc-200 ${disabled ? 'opacity-50' : ''}`}>
     <input
       type="checkbox"
-      className="h-4 w-4 accent-[#FF7300]"
+      className="h-4 w-4 accent-ui-accent"
       checked={checked}
       disabled={disabled}
       onChange={(e) => onChange(e.target.checked)}
