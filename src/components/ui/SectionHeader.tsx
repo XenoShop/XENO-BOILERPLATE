@@ -6,19 +6,11 @@ type SectionHeaderProps = {
   icon?: ReactNode
 }
 
-export const SectionHeader = ({ title, lead, icon }: SectionHeaderProps) => {
+export const SectionHeader = ({ title, icon }: SectionHeaderProps) => {
   return (
-    <div className="flex items-start justify-between gap-4">
-      <div>
-        {lead && (
-          <div className="mb-1 flex items-center gap-2">
-            <div className="h-2 w-2 rounded-full bg-ui-orange shadow-[0_0_10px_rgba(255,115,0,0.8)] animate-pulseDot" />
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-ui-orange">{lead}</p>
-          </div>
-        )}
-        <h2 className="text-2xl font-black tracking-wider text-white">{title}</h2>
-      </div>
-      {icon}
+    <div className="flex items-center justify-between gap-4">
+      <h2 className="text-[28px] font-extrabold leading-tight tracking-tight text-white">{title}</h2>
+      {icon && <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-ui-orange/25 bg-ui-orange/10">{icon}</span>}
     </div>
   )
 }

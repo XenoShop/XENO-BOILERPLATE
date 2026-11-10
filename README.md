@@ -2,7 +2,7 @@
 
 Reusable starter built with Vite + React + TypeScript + Tailwind.
 
-This project keeps the visual style language from your existing UI (colors, glow, glass panels, dark base), but removes all tablet/domain logic so you can use it in any new project.
+It carries the visual language of the Xeno Evidence & Forensics UI (deep dark base, soft raised panels, one orange accent, Manrope typeface) with all domain logic removed, so it can be the foundation for any new project.
 
 ## Stack
 
@@ -12,48 +12,40 @@ This project keeps the visual style language from your existing UI (colors, glow
 - Tailwind CSS 3
 - Framer Motion
 - Lucide React
+- Manrope Variable (`@fontsource-variable/manrope`, bundled, no CDN)
 - ESLint
 
 ## Quick Start
 
-1. Install dependencies:
-
-   npm install
-
-2. Start development server:
-
-   npm run dev
-
-3. Validate code quality:
-
-   npm run lint
-
-4. Build for production:
-
-   npm run build
+1. Install dependencies: `npm install`
+2. Start the dev server: `npm run dev`
+3. Validate code quality: `npm run lint`
+4. Build for production: `npm run build`
 
 ## Project Structure
 
 src/
 - components/ui/
-  - Button.tsx
+  - Badge.tsx
+  - Button.tsx (primary / ghost / danger, sm / md, loading)
   - Card.tsx
+  - Field.tsx (Field, Input, Select, Textarea, Check)
+  - Meter.tsx
   - SectionHeader.tsx
+  - Tabs.tsx
 - styles/
   - tokens.ts
-- App.tsx
+- App.tsx (showcase page, replace with your own app)
 - main.tsx
 - index.css
 
 ## Customization Guide
 
-- Color token list: src/styles/tokens.ts
-- Tailwind theme tokens: tailwind.config.js
-- Base page styling and gradients: src/index.css
-- Showcase page you can replace with your own app: src/App.tsx
+- Color tokens: `src/styles/tokens.ts` and `tailwind.config.js`
+- Base page styling, typography and focus rings: `src/index.css`
+- Typeface: `fontFamily.sans` in `tailwind.config.js`
 
 ## Notes
 
-- Boilerplate is intentionally clean and domain-agnostic.
-- No tablet apps, no mock tablet data, no specific business logic.
-- Ready to be copied and used as a foundation for new products.
+- Domain-agnostic: no tablet apps, no mock data, no business logic.
+- Scrollbars are hidden globally and `prefers-reduced-motion` is respected.

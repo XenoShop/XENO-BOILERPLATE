@@ -4,12 +4,14 @@ export type ColorToken = {
 }
 
 export const colorTokens: ColorToken[] = [
-  { name: 'Background', value: '#0F0F11' },
-  { name: 'Panel', value: 'rgba(25,25,30,0.6)' },
-  { name: 'Layer', value: '#18181B' },
-  { name: 'Border', value: '#27272A' },
-  { name: 'Accent', value: '#FF7300' },
-  { name: 'Accent Strong', value: '#FF9100' },
+  { name: 'Background', value: '#0B0C10' },
+  { name: 'Panel', value: '#12141A' },
+  { name: 'Layer', value: '#161920' },
+  { name: 'Raised', value: '#1B1F27' },
+  { name: 'Border', value: 'rgba(255,255,255,0.07)' },
+  { name: 'Text Muted', value: '#8A909D' },
+  { name: 'Accent', value: '#FF7A1A' },
+  { name: 'Accent Strong', value: '#FFA03A' },
   { name: 'Success', value: '#10B981' },
   { name: 'Info', value: '#06B6D4' },
   { name: 'Danger', value: '#EF4444' },

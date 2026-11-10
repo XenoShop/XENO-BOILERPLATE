@@ -5,13 +5,14 @@ export default {
     extend: {
       colors: {
         ui: {
-          bg: '#0f0f11',
-          panel: 'rgba(25,25,30,0.6)',
-          layer: '#18181b',
-          border: '#27272a',
-          textMuted: '#a1a1aa',
-          orange: '#FF7300',
-          orangeBright: '#FF9100',
+          bg: '#0b0c10',
+          panel: '#12141a',
+          layer: '#161920',
+          raised: '#1b1f27',
+          border: 'rgba(255,255,255,0.07)',
+          textMuted: '#8a909d',
+          orange: '#FF7A1A',
+          orangeBright: '#FFA03A',
           success: '#10B981',
           info: '#06B6D4',
           danger: '#EF4444',
@@ -22,12 +23,15 @@ export default {
           yellow: '#EAB308',
         },
       },
+      fontFamily: {
+        sans: ['"Manrope Variable"', '"Segoe UI"', 'system-ui', 'sans-serif'],
+      },
       boxShadow: {
-        'ui-soft': '0 8px 30px rgba(0,0,0,0.4)',
-        'ui-glow': '0 0 18px rgba(255,115,0,0.45)',
+        'ui-soft': '0 24px 60px -12px rgba(0,0,0,0.65), 0 0 0 1px rgba(255,255,255,0.04)',
+        'ui-glow': '0 0 22px rgba(255,122,26,0.35)',
       },
       borderRadius: {
-        'panel-xl': '24px',
+        'panel-xl': '22px',
       },
       backdropBlur: {
         panel: '12px',
